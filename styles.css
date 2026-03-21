@@ -1,0 +1,194 @@
+  body {
+            font-family: 'Georgia', serif;
+            background-color: #ffffff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+      
+        .header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(to bottom, #d2b48c, #f4f0e8);
+        }
+      
+        .header h1 {
+            font-size: 3em;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+      
+        .header h1.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+      
+        .verse-section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+      
+        .verse {
+            font-size: 1.5em;
+            font-style: italic;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-in, transform 0.8s ease-in;
+            margin-bottom: 30px;
+        }
+      
+        .verse.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+      
+        .animation-canvas {
+            display: block;
+            margin: 0 auto;
+            border: 2px solid #07070700;
+            border-radius: 10px;
+        }
+      
+        /* Particle styles for end-times feel (stars falling) */
+        .particle {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+      
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        /* New: Revelation Scroll Animation */
+        .scroll-section {
+            max-width: 800px;
+            margin: 40px auto;
+            text-align: center;
+        }
+      
+        .scroll-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+      
+        .scroll-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+      
+        .scroll-roll {
+            width: 50px;
+            height: 200px;
+            background: radial-gradient(circle, #8b4513, #a0522d);
+            border-radius: 50% 50% 50% 50% / 100% 100% 100% 100%;
+            position: absolute;
+            z-index: 2;
+        }
+      
+        .scroll-left {
+            left: 0;
+            transform: rotate(90deg);
+        }
+      
+        .scroll-right {
+            right: 0;
+            transform: rotate(90deg);
+        }
+      
+        .scroll-paper {
+            position: relative;
+            width: 0;
+            height: 180px;
+            background: #f5deb3; /* Parchment color */
+            overflow: hidden;
+            transition: width 2s ease-in-out;
+            z-index: 1;
+            border-top: 2px solid #d2b48c;
+            border-bottom: 2px solid #d2b48c;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+      
+        .scroll-paper.unrolled {
+            width: 600px;
+        }
+      
+        .scroll-text {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            font-size: 1.1em;
+            font-style: italic;
+            color: #4b2e1a;
+            opacity: 0;
+            transition: opacity 1s ease-in 1s;
+        }
+      
+        .scroll-paper.unrolled .scroll-text {
+            opacity: 1;
+        }
+      
+        .scroll-seals {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in 2s;
+        }
+      
+        .scroll-paper.unrolled .scroll-seals {
+            opacity: 1;
+        }
+      
+        .seal {
+            width: 10px; /* Smaller size */
+            height: 10px; /* Smaller size */
+            background: radial-gradient(circle at 30% 30%, #ff4d4d, #cc0000 70%); /* Wax-like gradient */
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.3); /* Depth and shine */
+            position: relative;
+        }
+        .seal::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 60%;
+            background: rgba(0,0,0,0.1); /* Subtle impression */
+            border-radius: 50%;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .seal::after {
+            content: '✝'; /* Simple cross symbol for biblical theme */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 6px; /* Adjusted for smaller seal */
+            color: rgba(0,0,0,0.3); /* Embossed look */
+            text-shadow: 0 1px 1px rgba(255,255,255,0.2);
+        }
+
