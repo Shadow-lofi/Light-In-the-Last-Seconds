@@ -1,194 +1,321 @@
-  body {
-            font-family: 'Georgia', serif;
-            background-color: #ffffff;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-      
-        .header {
-            text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(to bottom, #d2b48c, #f4f0e8);
-        }
-      
-        .header h1 {
-            font-size: 3em;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-      
-        .header h1.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-      
-        .verse-section {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-      
-        .verse {
-            font-size: 1.5em;
-            font-style: italic;
-            text-align: center;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.8s ease-in, transform 0.8s ease-in;
-            margin-bottom: 30px;
-        }
-      
-        .verse.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-      
-        .animation-canvas {
-            display: block;
-            margin: 0 auto;
-            border: 2px solid #07070700;
-            border-radius: 10px;
-        }
-      
-        /* Particle styles for end-times feel (stars falling) */
-        .particle {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            pointer-events: none;
-            animation: fall linear infinite;
-        }
-      
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
-        /* New: Revelation Scroll Animation */
-        .scroll-section {
-            max-width: 800px;
-            margin: 40px auto;
-            text-align: center;
-        }
-      
-        .scroll-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-      
-        .scroll-container.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-      
-        .scroll-roll {
-            width: 50px;
-            height: 200px;
-            background: radial-gradient(circle, #8b4513, #a0522d);
-            border-radius: 50% 50% 50% 50% / 100% 100% 100% 100%;
-            position: absolute;
-            z-index: 2;
-        }
-      
-        .scroll-left {
-            left: 0;
-            transform: rotate(90deg);
-        }
-      
-        .scroll-right {
-            right: 0;
-            transform: rotate(90deg);
-        }
-      
-        .scroll-paper {
-            position: relative;
-            width: 0;
-            height: 180px;
-            background: #f5deb3; /* Parchment color */
-            overflow: hidden;
-            transition: width 2s ease-in-out;
-            z-index: 1;
-            border-top: 2px solid #d2b48c;
-            border-bottom: 2px solid #d2b48c;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
-      
-        .scroll-paper.unrolled {
-            width: 600px;
-        }
-      
-        .scroll-text {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            font-size: 1.1em;
-            font-style: italic;
-            color: #4b2e1a;
-            opacity: 0;
-            transition: opacity 1s ease-in 1s;
-        }
-      
-        .scroll-paper.unrolled .scroll-text {
-            opacity: 1;
-        }
-      
-        .scroll-seals {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in 2s;
-        }
-      
-        .scroll-paper.unrolled .scroll-seals {
-            opacity: 1;
-        }
-      
-        .seal {
-            width: 10px; /* Smaller size */
-            height: 10px; /* Smaller size */
-            background: radial-gradient(circle at 30% 30%, #ff4d4d, #cc0000 70%); /* Wax-like gradient */
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.3); /* Depth and shine */
-            position: relative;
-        }
-        .seal::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60%;
-            height: 60%;
-            background: rgba(0,0,0,0.1); /* Subtle impression */
-            border-radius: 50%;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
-        }
-        .seal::after {
-            content: '✝'; /* Simple cross symbol for biblical theme */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 6px; /* Adjusted for smaller seal */
-            color: rgba(0,0,0,0.3); /* Embossed look */
-            text-shadow: 0 1px 1px rgba(255,255,255,0.2);
-        }
+/* ============================================================
+   Oil in My Lamp — restyled in the "Temple · Faith & Fitness"
+   design language: warm & reverent — parchment + gold + olive,
+   Fraunces (serif headings / scripture) + Inter (UI).
+   Loaded AFTER Bootstrap, so these :root vars and later rules win.
+   ============================================================ */
 
+:root {
+  /* ── Temple palette ──────────────────────────────────────── */
+  --parchment-50: #fdfbf6;  --parchment-100: #faf5ea; --parchment-200: #f3ead8; --parchment-300: #e9dcc1;
+  --ink-900: #2a2520; --ink-800: #3d362d; --ink-700: #524a3d; --ink-600: #6b6150;
+  --ink-500: #857a66; --ink-400: #a99d86; --ink-300: #c8bda6;
+  --gold-100: #f6ecd2; --gold-200: #ecd9a8; --gold-300: #ddc07a; --gold-400: #cda64f;
+  --gold-500: #bd8f33; --gold-600: #a2762a; --gold-700: #7e5c23;
+  --olive-100: #e8ebdc; --olive-400: #8a9468; --olive-500: #6e7a53; --olive-600: #56603f; --olive-700: #404a2f;
+  --clay-400: #d08a64; --clay-500: #c06b47; --clay-600: #a4542f;
+  --card: #fffdf8; --line: #ece2cd;
+
+  /* ── Remap Bootstrap's theme onto Temple ─────────────────── */
+  --bs-body-bg: var(--parchment-100);
+  --bs-body-color: var(--ink-900);
+  --bs-body-font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --bs-emphasis-color: var(--ink-900);
+  --bs-secondary-color: var(--ink-500);
+  --bs-border-color: var(--line);
+  --bs-link-color: var(--gold-700);
+  --bs-link-color-rgb: 126, 92, 35;
+  --bs-link-hover-color: var(--gold-600);
+  --bs-heading-color: var(--ink-900);
+
+  --bs-primary: #6e7a53;   --bs-primary-rgb: 110, 122, 83;
+  --bs-secondary: #857a66; --bs-secondary-rgb: 133, 122, 102;
+  --bs-success: #56603f;   --bs-success-rgb: 86, 96, 63;
+  --bs-info: #8a9468;      --bs-info-rgb: 138, 148, 104;
+  --bs-warning: #a2762a;   --bs-warning-rgb: 162, 118, 42;
+  --bs-danger: #a4542f;    --bs-danger-rgb: 164, 84, 47;
+  --bs-light: #faf5ea;     --bs-light-rgb: 250, 245, 234;
+  --bs-dark: #2a2520;      --bs-dark-rgb: 42, 37, 32;
+}
+
+/* ── Base ────────────────────────────────────────────────── */
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif !important;
+  color: var(--ink-900);
+  background-color: var(--parchment-100);
+  background-image:
+    radial-gradient(55rem 55rem at 110% -10%, rgba(189, 143, 51, 0.12), transparent 55%),
+    radial-gradient(45rem 45rem at -10% 110%, rgba(110, 122, 83, 0.12), transparent 55%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5,
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
+  font-family: 'Fraunces', ui-serif, Georgia, serif !important;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-900);
+}
+
+p { line-height: 1.7; }
+.lead { color: var(--ink-700); font-weight: 400; }
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-300), transparent);
+  opacity: 0.8;
+  margin: 1.75rem auto;
+  max-width: 14rem;
+}
+
+::selection { background: var(--gold-200); color: var(--ink-900); }
+
+/* A calmer reading width */
+article.container { max-width: 880px; }
+
+/* ── Hero / header ───────────────────────────────────────── */
+header {
+  background: linear-gradient(160deg, var(--parchment-200), var(--gold-100) 55%, var(--parchment-100)) !important;
+  color: var(--ink-900) !important;
+  text-align: center;
+  padding: 4rem 1.25rem 3rem !important;
+  border-bottom: 1px solid var(--line);
+}
+header h1 {
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  color: var(--ink-900);
+  margin-bottom: 0.4rem;
+}
+header h2, header .lead {
+  color: var(--gold-700) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+header p {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--ink-700);
+  max-width: 38rem;
+  margin: 0.5rem auto 0;
+}
+header p:last-of-type {
+  font-style: normal;
+  color: var(--gold-700);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* ── Navbar ──────────────────────────────────────────────── */
+.navbar, .navbar.bg-warning {
+  background: rgba(250, 245, 234, 0.85) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+.navbar-brand {
+  color: var(--ink-900) !important;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+}
+.navbar .nav-link {
+  color: var(--ink-600) !important;
+  font-weight: 500;
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem !important;
+  transition: color 0.15s, background 0.15s;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--ink-900) !important;
+  background: var(--gold-100);
+}
+.navbar-toggler { border-color: var(--line) !important; }
+.dropdown-menu {
+  background: var(--card) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 1rem;
+  box-shadow: 0 12px 28px -18px rgba(42, 37, 32, 0.4);
+  padding: 0.4rem;
+}
+.dropdown-item {
+  color: var(--ink-700) !important;
+  background: transparent !important;
+  border-radius: 0.6rem;
+  padding: 0.5rem 0.8rem;
+}
+.dropdown-item:hover, .dropdown-item:focus {
+  color: var(--ink-900) !important;
+  background: var(--gold-100) !important;
+}
+
+/* ── Accordions (the bulk of the content) ────────────────── */
+.accordion {
+  --bs-accordion-bg: transparent;
+  --bs-accordion-border-color: var(--line);
+  --bs-accordion-border-radius: 1rem;
+  --bs-accordion-inner-border-radius: 1rem;
+  --bs-accordion-btn-color: var(--ink-800);
+  --bs-accordion-btn-bg: var(--card);
+  --bs-accordion-active-color: var(--ink-900);
+  --bs-accordion-active-bg: var(--gold-100);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem rgba(205, 166, 79, 0.35);
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23a2762a'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23a2762a'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+.accordion-item {
+  background: var(--card) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 1rem !important;
+  margin-bottom: 0.85rem;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(42, 37, 32, 0.04), 0 14px 30px -22px rgba(42, 37, 32, 0.25);
+}
+.accordion-header { margin: 0; }
+.accordion-button {
+  font-family: 'Fraunces', serif !important;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--ink-800) !important;
+  background: var(--card) !important;
+  padding: 1.1rem 1.25rem;
+}
+.accordion-button:not(.collapsed) {
+  color: var(--ink-900) !important;
+  background: var(--gold-100) !important;
+  box-shadow: inset 0 -1px 0 var(--line);
+}
+.accordion-button:focus {
+  border-color: var(--gold-300) !important;
+  box-shadow: 0 0 0 0.2rem rgba(205, 166, 79, 0.35) !important;
+}
+.accordion-body { color: var(--ink-700); background: var(--parchment-50); }
+.accordion-body p, .accordion-body li { color: var(--ink-700); }
+
+/* ── List groups ─────────────────────────────────────────── */
+.list-group-item {
+  background: var(--card) !important;
+  border-color: var(--line) !important;
+  color: var(--ink-800) !important;
+}
+.list-group-flush, .list-group-flush > .list-group-item { background: transparent !important; }
+
+/* ── Icon-badge lists (7 trumpets, statue composition, Olivet) ── */
+.trumpet-list, .icon-list { padding: 0; margin: 1.5rem 0 0.5rem; }
+.trumpet-item, .icon-item {
+  display: flex !important;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--card) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 0.9rem !important;
+  margin-bottom: 0.6rem;
+  padding: 0.8rem 1rem !important;
+  color: var(--ink-800) !important;
+  text-align: left;
+}
+.trumpet-badge, .icon-badge {
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.7rem;
+  background: var(--gold-100);
+  color: var(--gold-700);
+  font-size: 1.15rem;
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn { border-radius: 999px !important; font-weight: 500; padding: 0.5rem 1.25rem; }
+.btn-danger, .btn-warning, .btn-primary {
+  background: linear-gradient(to bottom, var(--gold-300), var(--gold-500)) !important;
+  border: none !important;
+  color: var(--ink-900) !important;
+  box-shadow: 0 1px 2px rgba(42, 37, 32, 0.15);
+}
+.btn-danger:hover, .btn-warning:hover, .btn-primary:hover {
+  background: linear-gradient(to bottom, var(--gold-400), var(--gold-600)) !important;
+  color: var(--ink-900) !important;
+}
+
+/* ── Images ──────────────────────────────────────────────── */
+img.img-fluid, img.rounded {
+  border-radius: 1rem !important;
+  border: 1px solid var(--line);
+  box-shadow: 0 14px 30px -22px rgba(42, 37, 32, 0.5);
+}
+
+/* ── Footer & dark blocks ────────────────────────────────── */
+/* Footer is a dark anchor. High-specificity selectors so it stays dark with
+   light text even though it's nested inside a (now light) teaching section. */
+footer, section.bg-dark footer { background: var(--ink-900) !important; border: none !important; }
+footer, footer p, footer li, footer span, footer .text-white,
+section.bg-dark footer, section.bg-dark footer p, section.bg-dark footer li,
+section.bg-dark footer span, section.bg-dark footer .text-white {
+  color: var(--parchment-200) !important;
+}
+footer a, section.bg-dark footer a { color: var(--gold-300) !important; }
+footer .list-group-item, section.bg-dark footer .list-group-item {
+  background: transparent !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ── Harmonize Bootstrap's loud color utilities ──────────── */
+.text-danger { color: var(--clay-600) !important; }
+.text-warning { color: var(--gold-700) !important; }
+.text-primary { color: var(--olive-600) !important; }
+.text-info { color: var(--olive-500) !important; }
+.text-secondary, .text-muted { color: var(--ink-500) !important; }
+.text-dark { color: var(--ink-900) !important; }
+
+.bg-dark { background-color: var(--ink-900) !important; }
+.bg-warning, .bg-danger, .bg-light, .bg-white,
+.text-bg-danger, .text-bg-warning {
+  background-color: var(--gold-100) !important;
+  color: var(--ink-800) !important;
+}
+/* keep text readable inside the softened accent blocks */
+.bg-danger .text-warning, .text-bg-danger .text-warning,
+.bg-danger .text-dark, .bg-warning .text-dark { color: var(--ink-800) !important; }
+/* dark blocks keep light text (footer, dropdown) */
+.bg-dark, .bg-dark p, .bg-dark .text-white, .bg-dark li { color: var(--parchment-100) !important; }
+
+/* The 5 major teaching sections were dark bands — convert to light parchment
+   panels so the page reads clean & airy like the app. Scoped to <section> so
+   the footer and navbar dropdown keep their dark treatment. */
+section.bg-dark {
+  background: var(--parchment-200) !important;
+  color: var(--ink-700) !important;
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  padding: 1.75rem 1.25rem !important;
+  margin-top: 2.75rem !important;
+}
+section.bg-dark p,
+section.bg-dark li,
+section.bg-dark .text-white { color: var(--ink-700) !important; }
+
+/* ── Scripture / quotes ──────────────────────────────────── */
+.verse, blockquote { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-700); }
+
+/* ── Signature animations — kept, but calmed for a cleaner feel ── */
+.particle { background: var(--gold-400) !important; opacity: 0.22 !important; }
+.animation-canvas { display: block; margin: 0 auto; max-width: 100%; height: auto; border: none !important; }
+.scroll-paper { background: var(--parchment-200) !important; border-color: var(--gold-300) !important; }
+.scroll-text { color: var(--ink-700) !important; }
+.scroll-roll { background: radial-gradient(circle, var(--gold-600), var(--gold-700)) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

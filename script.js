@@ -34,7 +34,7 @@ function revealOnScroll() {
                 setTimeout(() => {
                     particle.remove();
                 }, parseFloat(particle.style.animationDuration) * 1000);
-            }, 200);
+            }, 900);
         }
       
         // Canvas animation: Simple glowing cross with subtle pulse
@@ -50,7 +50,7 @@ function revealOnScroll() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
               
                 // Draw vertical bar (increased vertical length)
-                ctx.fillStyle = 'rgba(210, 180, 140, 0.8)';
+                ctx.fillStyle = 'rgba(162, 118, 42, 0.85)';
                 ctx.fillRect(centerX - 20, centerY - 150, 40, 300);
               
                 // Draw horizontal bar (moved further up)
