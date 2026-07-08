@@ -77,7 +77,11 @@ This website is intended for educational and informational purposes. Interpretat
 
 ## 📜 License
 
-This project is licensed under the MIT License. See the `LICENSE` file for more information.
+© 2026 Tavaris Freeman. **All rights reserved.**
+
+This project is proprietary. The source is shared for viewing and reference only —
+it may not be copied, modified, reused, or redistributed without prior written
+permission. See [LICENSE](LICENSE) for details.
 
 ---
 
